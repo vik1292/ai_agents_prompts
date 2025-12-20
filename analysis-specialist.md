@@ -1,7 +1,7 @@
 
 Write a Python script using pandas to process two Excel workbooks:
 
-GOAL
+## GOAL
 - Read `master_inventory.xlsx` and store it as a DataFrame named `master`
 - Read `hl_retirement_phases.xlsx`, load ALL sheets (there are 4 tabs), and store each sheet in a dict keyed by sheet name. Also bind each DataFrame to a variable named excatly as the sheet name (valid Python identifiers only).
 - For each sheet in `hl_retirement_phases.xlsx`, perform a LEFT JOIN from `master` on:
@@ -12,7 +12,7 @@ GOAL
     1) `master_output.csv`: all rows from `master` where `retire == "X"`.
     2) `error.csv`: rows from ALL datasets (both `master` and every sheet) that did NOT have a valid match. Include a `source_dataset` column indicating origin (e.g., `"master"` or the sheet name).
 
-REQUIREMENTS & ASSUMPTIONS
+## REQUIREMENTS & ASSUMPTIONS
 - Use `pandas` with `engine="openpyxl"` when reading Excel.
 - Files are local in the current working directory and named excatly:
     - `master_inventory.xlsx`
@@ -43,7 +43,7 @@ REQUIREMENTS & ASSUMPTIONS
     - Friendly messages that tell which sheet failed and which column is missing.
 - Ensure the script can be run as a module: `if __name__ == "__main__": main()`
 
-ACCEPTANCE CRITERIA
+## ACCEPTANCE CRITERIA
 - `master` loads successfully from `master_inventory.xlsx`.
 - All 4 sheets are loaded from `hl_retirement_phases.xlsx` and accessible by their tab names.
 - After processing, `master` has a `retire` column; matching rows have `"X"`.
@@ -55,7 +55,7 @@ ACCEPTANCE CRITERIA
 - No duplicated `master` rows introduced by joins.
 - Script logs counts (e.g., number of matched rows, numbers of errors from each dataset) and prints where the output files are saved.
 
-IMPLEMENTATION NOTES
+## IMPLEMENTATION NOTES
 - To avoid rows inflation during LEFT JOIN, use a membership check rather than merging full frames:
     - Build a normalized set of `Letter_ID` from `master`.
     - For each sheet, check `communication_id` membership in that set.
